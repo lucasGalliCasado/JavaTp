@@ -1,0 +1,37 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------------< aed:labo4 >------------------------------
+[INFO] Building labo4 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.10:prepare-agent (jacoco-initialize) @ labo4 ---
+[INFO] argLine set to -javaagent:/home/sdandois/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar=destfile=/tmp/tmpvufz61ci/target/jacoco.exec
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ labo4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /tmp/tmpvufz61ci/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ labo4 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /tmp/tmpvufz61ci/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /tmp/tmpvufz61ci/src/main/java/aed/clasestp2.java:[11,8] class ColaDePrioridadSinPriorityQueue is public, should be declared in a file named ColaDePrioridadSinPriorityQueue.java
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.102 s
+[INFO] Finished at: 2023-11-08T16:21:46-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project labo4: Compilation failure
+[ERROR] /tmp/tmpvufz61ci/src/main/java/aed/clasestp2.java:[11,8] class ColaDePrioridadSinPriorityQueue is public, should be declared in a file named ColaDePrioridadSinPriorityQueue.java
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
