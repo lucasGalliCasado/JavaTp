@@ -22,8 +22,7 @@ public class SistemaCNE {
     // ese districto
     //HAY QUE AGREGAR
     
-    Set<Integer> mesasRegistradas;
-    boolean ballotage;
+    int[] mesasRegistradas;
     int totalVotos;
 
     
@@ -54,10 +53,10 @@ public class SistemaCNE {
         }
         // Se inicializa en cero por predeterminado en java tenemos que hacer q nuestro tipo array haga lo mismo
         this.votosPresidenciales= new int[nombresPartidos.length];
-        this.mesasRegistradas= new HashSet<>();
-        this.votosDiputados= new int[nombresPartidos.length][nombresDistritos.length];
-        this.ballotage=true;
+        this.votosDiputados= new int[nombresDistritos.length][nombresPartidos.length];
+        this.mesasRegistradas= new int[0];
         this.totalVotos=0;
+        //inicializar los heaps
     }
 
     public String nombrePartido(int idPartido) {
@@ -111,16 +110,21 @@ public class SistemaCNE {
 
         //sobre la matriz votosDiputados sumamos los votos de cada partido
         // del districto dado, i.e. sumamos la fila de votos de diputados.  complejidad(P)
-
+        int i=0;
+        while(i<nombresPartidos.length){
+            votosDiputados[distrito][i]=votosDiputados[distrito][i]+actaMesa[i].votosDiputados();
+            votosPresidenciales[i]=votosPresidenciales[i]+actaMesa[i].votosPresidente();
+            totalVotos=totalVotos+actaMesa[i].votosPresidente();
+            i++;
+        }
         // Tomamos la fila de la matriz votosDiputados que acabamos de actualizar, i.e. la fila indiceDeMesa(idMesa)
         // y la transformamos en un heap. Complejidad(P)
+        // recordar agregar marcador a los valores para saber a que partido representan
+        // no hace falta agregar los ultimos votos, ya que representan los votos en blanco
         //!!!! Se debe transformar toda la lista junta, no de a uno, sino no da la complejidad!!!!!
 
-        // Si sale bien esto, ya esta garantizada la complejidad de resultados diputados 
-
-
-        
-
+        //agrego la mesa a mesasRegistradas 
+        //mesasRegistradas.agregar(idMesa);
     }
 
     public int votosPresidenciales(int idPartido) {
@@ -128,20 +132,23 @@ public class SistemaCNE {
     }
 
     public int votosDiputados(int idPartido, int idDistrito) {
-        throw new UnsupportedOperationException("No implementada aun");
+        return votosDiputados[idDistrito][idPartido];
     }
 
     public int[] resultadosDiputados(int idDistrito){
-
-        
-
-
-
+        // agarro el heap correspondiente al distrito
+        // inicializo un array "res" con longitud P-1, el que voy a devolver
+        // saco el primer valor del heap, y sumo 1 al partido que corresponde a ese valor
+        // meto el valor dividido res[partido correspondiente]+1, complejidad log(P-1)
+        // esto lo repito Dd veces
         throw new UnsupportedOperationException("No implementada aun");
     }
 
     public boolean hayBallotage(){
-        return ballotage;
+        //aca necesitamos metodos q nos devuelvan el primero y segundo de heapPresidentes
+        //float porcetajeA= (heapPresidentes.primero()*100)/totalVotos;
+        //float porcetajeB= (heapPresidentes.segundo()*100)/totalVotos;
+        //return !(porcetajeA>=45 || (porcetajeA>=40&& (porcetajeA-porcetajeB)>10));
+        throw new UnsupportedOperationException("No implementada aun");
     }
 }
-
