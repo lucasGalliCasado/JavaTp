@@ -5,10 +5,7 @@
 
 //TAMBEIN HAY QUE IMPLEMENTAR ARRAY. Lo hacemos de tal forma que se inicialize en 0 todas las coordenadas
 
-import java.util.*;
 
-
-import java.util.Arrays;
 
 //Creamos una class para un heap que ordena de mayor a menor
 public class maxHeap{
@@ -91,7 +88,15 @@ public class maxHeap{
 
 
     public int mirarSegundo(){
-        return heap[1];
+        int res;
+        if(hijoIzquierdo(0)>hijoDerecho(0)){
+            res = hijoIzquierdo(0);
+        }
+        else{
+            res = hijoDerecho(0);
+        }
+
+        return res;
     }
 
     public int extraerMax() {
@@ -116,9 +121,11 @@ public class maxHeap{
     }
 
     //Aplicamos el algoritmo de Floyd sobre el array ingresado
-    private maxHeap array2heap(int[] array){
-        // Constante, complejidad O(1)
-        maxHeap heapA = new maxHeap(array.length);
+    public void array2heap(int[] array){
+        
+        //Ponemos el tamano y la cota del heap en el largo del array
+        size = array.length;
+        cota = array.length;
 
         // Constante, complejidad O(1)
         int n = array.length;
@@ -140,17 +147,20 @@ public class maxHeap{
                 swap(nodoActual, hijoIzquierdo(nodoActual));
             }
 
+        // Una vez que heapifiamos el array, lo asignamos
+        heap = array;
+
             //De esta forma, si no se cumple el orden, cambiamos el valor del nodo
             // por el valor del hijo mas grande
             
             nodoActual --;
         }
         
-        return heapA;
 
     }
 
     // Cuando la llamamos de forma no recursiva debe ser con cero!!
+    // Se asegura de que se cumpla la relacion de orden a partir del nodo que ingresamos
     private void maxHeapify(int nodoActual) {
         int hIzq = hijoIzquierdo(nodoActual);
         int hDer = hijoDerecho(nodoActual);
