@@ -1,0 +1,151 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------------< aed:labo4 >------------------------------
+[INFO] Building labo4 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.10:prepare-agent (jacoco-initialize) @ labo4 ---
+[INFO] argLine set to -javaagent:/home/sdandois/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar=destfile=/tmp/tmplzixz2w2/target/jacoco.exec
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ labo4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /tmp/tmplzixz2w2/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ labo4 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /tmp/tmplzixz2w2/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[9,8] duplicate class: maxHeap
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/SistemaCNE.java:[17,5] cannot access aed.maxHeap
+  bad source file: /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java
+    file does not contain class aed.maxHeap
+    Please remove or make sure it appears in the correct subdirectory of the sourcepath.
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/Tupla.java:[2,8] duplicate class: Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/SistemaCNE.java:[171,9] cannot access aed.Tupla
+  bad source file: /tmp/tmplzixz2w2/src/main/java/aed/Tupla.java
+    file does not contain class aed.Tupla
+    Please remove or make sure it appears in the correct subdirectory of the sourcepath.
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/SistemaCNE.java:[185,28] cannot find symbol
+  symbol:   variable heapPresidentes
+  location: class aed.SistemaCNE
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/SistemaCNE.java:[186,28] cannot find symbol
+  symbol:   variable heapPresidentes
+  location: class aed.SistemaCNE
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[19,21] incompatible types: int[] cannot be converted to Tupla[]
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[43,24] incompatible types: Tupla cannot be converted to int
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[45,19] incompatible types: int cannot be converted to Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[59,27] cannot find symbol
+  symbol:   method primerElemento()
+  location: variable value of type Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[74,48] cannot find symbol
+  symbol:   method primerElemento()
+  location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[74,90] cannot find symbol
+  symbol:   method primerElemento()
+  location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[84,20] incompatible types: Tupla cannot be converted to int
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[90,34] cannot find symbol
+  symbol:   method primerElemento()
+  location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[90,74] cannot find symbol
+  symbol:   method primerElemento()
+  location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[91,23] incompatible types: Tupla cannot be converted to int
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[94,23] incompatible types: Tupla cannot be converted to int
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[104,20] incompatible types: int cannot be converted to Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[112,24] incompatible types: int cannot be converted to Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[125,34] cannot find symbol
+  symbol:   class array
+  location: class maxHeap
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[127,29] cannot find symbol
+  symbol:   method Tupla(int,int)
+  location: class maxHeap
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[155,16] incompatible types: int[] cannot be converted to Tupla[]
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[173,38] cannot find symbol
+  symbol:   method primerElemento()
+  location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[173,67] cannot find symbol
+  symbol:   method primerElemento()
+  location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[176,38] cannot find symbol
+  symbol:   method primerElemento()
+  location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[176,67] cannot find symbol
+  symbol:   method primerElemento()
+  location: class Tupla
+[INFO] 26 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.364 s
+[INFO] Finished at: 2023-11-10T19:31:13-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project labo4: Compilation failure: Compilation failure: 
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[9,8] duplicate class: maxHeap
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/SistemaCNE.java:[17,5] cannot access aed.maxHeap
+[ERROR]   bad source file: /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java
+[ERROR]     file does not contain class aed.maxHeap
+[ERROR]     Please remove or make sure it appears in the correct subdirectory of the sourcepath.
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/Tupla.java:[2,8] duplicate class: Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/SistemaCNE.java:[171,9] cannot access aed.Tupla
+[ERROR]   bad source file: /tmp/tmplzixz2w2/src/main/java/aed/Tupla.java
+[ERROR]     file does not contain class aed.Tupla
+[ERROR]     Please remove or make sure it appears in the correct subdirectory of the sourcepath.
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/SistemaCNE.java:[185,28] cannot find symbol
+[ERROR]   symbol:   variable heapPresidentes
+[ERROR]   location: class aed.SistemaCNE
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/SistemaCNE.java:[186,28] cannot find symbol
+[ERROR]   symbol:   variable heapPresidentes
+[ERROR]   location: class aed.SistemaCNE
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[19,21] incompatible types: int[] cannot be converted to Tupla[]
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[43,24] incompatible types: Tupla cannot be converted to int
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[45,19] incompatible types: int cannot be converted to Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[59,27] cannot find symbol
+[ERROR]   symbol:   method primerElemento()
+[ERROR]   location: variable value of type Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[74,48] cannot find symbol
+[ERROR]   symbol:   method primerElemento()
+[ERROR]   location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[74,90] cannot find symbol
+[ERROR]   symbol:   method primerElemento()
+[ERROR]   location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[84,20] incompatible types: Tupla cannot be converted to int
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[90,34] cannot find symbol
+[ERROR]   symbol:   method primerElemento()
+[ERROR]   location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[90,74] cannot find symbol
+[ERROR]   symbol:   method primerElemento()
+[ERROR]   location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[91,23] incompatible types: Tupla cannot be converted to int
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[94,23] incompatible types: Tupla cannot be converted to int
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[104,20] incompatible types: int cannot be converted to Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[112,24] incompatible types: int cannot be converted to Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[125,34] cannot find symbol
+[ERROR]   symbol:   class array
+[ERROR]   location: class maxHeap
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[127,29] cannot find symbol
+[ERROR]   symbol:   method Tupla(int,int)
+[ERROR]   location: class maxHeap
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[155,16] incompatible types: int[] cannot be converted to Tupla[]
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[173,38] cannot find symbol
+[ERROR]   symbol:   method primerElemento()
+[ERROR]   location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[173,67] cannot find symbol
+[ERROR]   symbol:   method primerElemento()
+[ERROR]   location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[176,38] cannot find symbol
+[ERROR]   symbol:   method primerElemento()
+[ERROR]   location: class Tupla
+[ERROR] /tmp/tmplzixz2w2/src/main/java/aed/maxHeap.java:[176,67] cannot find symbol
+[ERROR]   symbol:   method primerElemento()
+[ERROR]   location: class Tupla
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
