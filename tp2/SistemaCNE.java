@@ -1,4 +1,4 @@
-package aed;
+//package aed;
 
 //luego quitarlo al crear la clase set
 import java.util.*;
@@ -14,13 +14,12 @@ public class SistemaCNE {
     
     int[] votosPresidenciales;
     // heap con los votos presidenciales de cada partido 
-    //HAY QUE AGREGAR
-
+    maxHeap votosPresidencialesHeap;
     // matriz M donde Mij = votos del partido j en el districto i para los diputados 
     int[][] votosDiputados;
     // Lista de heaps para cada districto, donde cada heap tendra los votos de diputados de cada partido en
     // ese districto
-    //HAY QUE AGREGAR
+    maxHeap[] votosDiputadosXDistHeap;
     
     int[] mesasRegistradas;
     int totalVotos;
@@ -57,6 +56,8 @@ public class SistemaCNE {
         this.mesasRegistradas= new int[0];
         this.totalVotos=0;
         //inicializar los heaps
+        this.votosDiputadosXDistHeap = new maxHeap[nombresDistritos.length];
+        this.votosPresidencialesHeap = new maxHeap(votosPresidenciales.length);
     }
 
     public String nombrePartido(int idPartido) {
@@ -109,7 +110,7 @@ public class SistemaCNE {
         int distrito=indiceDeMesa(idMesa);
 
         //sobre la matriz votosDiputados sumamos los votos de cada partido
-        // del districto dado, i.e. sumamos la fila de votos de diputados.  complejidad(P)
+        // del districto dado, i.e. sumamos la fila de votos de diputados.  complejidad O(P)
         int i=0;
         while(i<nombresPartidos.length){
             votosDiputados[distrito][i]=votosDiputados[distrito][i]+actaMesa[i].votosDiputados();
@@ -118,10 +119,33 @@ public class SistemaCNE {
             i++;
         }
         // Tomamos la fila de la matriz votosDiputados que acabamos de actualizar, i.e. la fila indiceDeMesa(idMesa)
-        // y la transformamos en un heap. Complejidad(P)
-        // recordar agregar marcador a los valores para saber a que partido representan
-        // no hace falta agregar los ultimos votos, ya que representan los votos en blanco
-        //!!!! Se debe transformar toda la lista junta, no de a uno, sino no da la complejidad!!!!!
+        // y la transformamos en un heap. Complejidad O(P)
+        // Ojo! NO tienen que estar los votos en blanco en los heaps de votos de partido x districto, porque les vamos 
+        // a tomar max
+        
+        // Copiamos los votos no blancos de nuestra mesa
+        int[] filaId = new int[votosDiputados.length-1];
+        for(int j = 0; j < votosDiputados.length-1;j++){
+            filaId = votosDiputados[j];
+        }
+        //heapifiamos
+        maxHeap filaIdHeap = new maxHeap(filaId.length);
+        filaIdHeap.array2heap(filaId);
+
+        // Le agregamos el heap a la variable correspondiente
+        votosDiputadosXDistHeap[i] = filaIdHeap;
+        
+        //En el caso de votosPresidencialesHeap, es un unico heap, que ahora debemos actualizar
+        int[] votosPr = new int[votosPresidenciales.length-1];
+        for(int j = 0; j < votosPresidenciales.length-1;j++){
+            votosPr[j] = votosPresidenciales[j];
+        }
+        
+        maxHeap votosPrHeap = new maxHeap(votosPresidenciales.length -1); //nuevamente, excluimos los votos en blanco
+        votosPrHeap.array2heap(votosPr);
+        
+        votosPresidencialesHeap = votosPrHeap;
+
 
         //agrego la mesa a mesasRegistradas 
         //mesasRegistradas.agregar(idMesa);
@@ -145,7 +169,7 @@ public class SistemaCNE {
     }
 
     public boolean hayBallotage(){
-        //aca necesitamos metodos q nos devuelvan el primero y segundo de heapPresidentes
+        //aca necesitamos metodos q nos devuelvan el primero y segundo de heapPresidentes <- estan implementados en maxHeap
         //float porcetajeA= (heapPresidentes.primero()*100)/totalVotos;
         //float porcetajeB= (heapPresidentes.segundo()*100)/totalVotos;
         //return !(porcetajeA>=45 || (porcetajeA>=40&& (porcetajeA-porcetajeB)>10));
