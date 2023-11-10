@@ -1,0 +1,185 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------------< aed:labo4 >------------------------------
+[INFO] Building labo4 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.10:prepare-agent (jacoco-initialize) @ labo4 ---
+[INFO] argLine set to -javaagent:/home/sdandois/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar=destfile=/tmp/tmpr5qr4n92/target/jacoco.exec
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ labo4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /tmp/tmpr5qr4n92/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ labo4 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /tmp/tmpr5qr4n92/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ labo4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /tmp/tmpr5qr4n92/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ labo4 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /tmp/tmpr5qr4n92/target/test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[16,12] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[28,12] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[45,38] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[25,20] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[42,20] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[46,19] package SistemaCNE does not exist
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[46,60] package SistemaCNE does not exist
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[55,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[61,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[72,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[89,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[106,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[148,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[177,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[190,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[218,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[270,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[297,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[335,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[355,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[378,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[401,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[423,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[439,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[458,9] cannot find symbol
+  symbol:   class SistemaCNE
+  location: class aed.SistemaCNETests
+[INFO] 25 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.406 s
+[INFO] Finished at: 2023-11-10T15:30:03-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:testCompile (default-testCompile) on project labo4: Compilation failure: Compilation failure: 
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[16,12] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[28,12] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[45,38] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[25,20] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[42,20] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[46,19] package SistemaCNE does not exist
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[46,60] package SistemaCNE does not exist
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[55,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[61,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[72,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[89,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[106,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[148,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[177,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[190,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[218,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[270,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[297,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[335,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[355,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[378,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[401,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[423,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[439,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] /tmp/tmpr5qr4n92/src/test/java/aed/SistemaCNETests.java:[458,9] cannot find symbol
+[ERROR]   symbol:   class SistemaCNE
+[ERROR]   location: class aed.SistemaCNETests
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
