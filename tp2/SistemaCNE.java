@@ -122,10 +122,10 @@ public class SistemaCNE {
         // a tomar max
         
         // Copiamos los votos no blancos de nuestra mesa
-        Tupla<Integer,String>[] filaId = new Tupla[votosDiputados.length-1];
+        Tupla<Integer,Integer>[] filaId = new Tupla[nombresPartidos.length-1]; // :)
 
-        for(int j = 0; j < votosDiputados.length-1;j++){
-            filaId[j] = new Tupla(votosDiputados[distrito][j],'j');
+        for(int j = 0; j < nombresPartidos.length-1;j++){
+            filaId[j] = new Tupla(votosDiputados[distrito][j],j);
         }
 
 
@@ -138,9 +138,9 @@ public class SistemaCNE {
         votosDiputadosXDistHeap[distrito] = filaIdHeap;
         
         //En el caso de votosPresidencialesHeap, es un unico heap, que ahora debemos actualizar
-        Tupla<Integer,String>[] votosPr = new Tupla[votosPresidenciales.length-1];
+        Tupla<Integer,Integer>[] votosPr = new Tupla[votosPresidenciales.length-1];
         for(int j = 0; j < votosPresidenciales.length-1;j++){
-            votosPr[j] = new Tupla(votosPresidenciales[j],'j');
+            votosPr[j] = new Tupla(votosPresidenciales[j],j);
         }
         
         maxHeap votosPrHeap = new maxHeap(votosPresidenciales.length -1); //nuevamente, excluimos los votos en blanco
@@ -165,19 +165,19 @@ public class SistemaCNE {
         // estas tres lineas son O(1)
         int[] contadorCantidadDeBancas = new int[nombresPartidos.length-1];
         int k = 0;
-        Tupla<Integer, String> max;
+        Tupla<Integer, Integer> max; // :)
 
-        while (k < diputadosPorDistritos[idDistrito]) {
+        while (k < diputadosPorDistritos[idDistrito]) { 
             //O(1) por heap. Miramos y sacamos el maximo(1era coord)
             max = votosDiputadosXDistHeap[idDistrito].extraerMax();
             //Vamos a la posicion que corresponde al partido con mas votos O(1)
-            contadorCantidadDeBancas[Integer.parseInt(max.getSegundoElemento())]++;
+            contadorCantidadDeBancas[max.getSegundoElemento()]++;
             //Dividimos el maximo segun Dhont y encolamos la tupla con la division y su id 
 
             //complejidad O(log(n))
             votosDiputadosXDistHeap[idDistrito].encolar(new Tupla<>(
-            votosDiputados[idDistrito][max.getPrimerElemento()] /
-            contadorCantidadDeBancas[Integer.parseInt(max.getSegundoElemento())] ,
+            votosDiputados[idDistrito][max.getSegundoElemento()] /
+            (contadorCantidadDeBancas[max.getSegundoElemento()]+1),
             max.getSegundoElemento()));
             k++;
         }
