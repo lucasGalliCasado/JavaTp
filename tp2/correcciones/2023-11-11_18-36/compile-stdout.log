@@ -1,0 +1,44 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------------< aed:labo4 >------------------------------
+[INFO] Building labo4 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.10:prepare-agent (jacoco-initialize) @ labo4 ---
+[INFO] argLine set to -javaagent:/home/sdandois/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar=destfile=/tmp/tmpt_gdsejo/target/jacoco.exec
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ labo4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /tmp/tmpt_gdsejo/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ labo4 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /tmp/tmpt_gdsejo/target/classes
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] /tmp/tmpt_gdsejo/src/main/java/aed/SistemaCNE.java: Some input files use unchecked or unsafe operations.
+[WARNING] /tmp/tmpt_gdsejo/src/main/java/aed/SistemaCNE.java: Recompile with -Xlint:unchecked for details.
+[INFO] 2 warnings 
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /tmp/tmpt_gdsejo/src/main/java/aed/maxHeap.java:[22,21] generic array creation
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.406 s
+[INFO] Finished at: 2023-11-11T18:36:31-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project labo4: Compilation failure
+[ERROR] /tmp/tmpt_gdsejo/src/main/java/aed/maxHeap.java:[22,21] generic array creation
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
