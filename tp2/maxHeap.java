@@ -10,7 +10,7 @@ package aed;
 
 //Creamos una class para un heap que ordena de mayor a menor
 public class maxHeap{
-    private Tupla<Integer,String>[] heap;
+    private Tupla<Integer,Integer>[] heap;
     private int size;
     private int cota;
 
@@ -19,7 +19,7 @@ public class maxHeap{
     public maxHeap(int cota) {
         this.cota = cota;
         this.size = 0;
-        this.heap = new Tupla[cota];
+        this.heap = new Tupla<Integer,Integer>[cota];
 
     }
 
@@ -44,13 +44,13 @@ public class maxHeap{
     
     // Esto tiene complejidad constante, O(1)
     private void swap(int i, int j) {
-        Tupla<Integer,String> temp = heap[i];
+        Tupla<Integer,Integer> temp = heap[i];
         heap[i] = heap[j];
         heap[j] = temp;
     }
 
     // boceto de algoritmo en slide 18
-    public void encolar(Tupla<Integer, String> value) {
+    public void encolar(Tupla<Integer, Integer> value) {
         // O(1)
         if (size == cota) {
             // Segun la idea detras de nuestra implementacion, no deberia suceder este caso(agregar por encima de la cota)
@@ -86,13 +86,13 @@ public class maxHeap{
     // queda 4*O(1) + O(log(n)) -> Tiene complejidad O(log(n))
 
     //O(1)
-    public Tupla<Integer,String> mirarMax(){
+    public Tupla<Integer,Integer> mirarMax(){
         return heap[0];
     }
 
 
-    public Tupla<Integer,String> mirarSegundo(){
-        Tupla<Integer,String> res;
+    public Tupla<Integer,Integer> mirarSegundo(){
+        Tupla<Integer,Integer> res;
         if(heap[hijoIzquierdo(0)].getPrimerElemento() > heap[hijoDerecho(0)].getPrimerElemento()){
             res = heap[hijoIzquierdo(0)];
         }
@@ -104,15 +104,15 @@ public class maxHeap{
     }
 
     
-    public Tupla<Integer, String> extraerMax() {
+    public Tupla<Integer, Integer> extraerMax() {
         // Este caso no deberia pasar, lo ponemos por si acaso
         //if (size == 0) {
         //}
         
-        Tupla<Integer,String> tuplaCero = new Tupla(0,' ');
+        Tupla<Integer,Integer> tuplaCero = new Tupla(0,0);
 
         // Por como esta definido nuestro heap el maximo es el primer elemento de la lsita
-        Tupla max = heap[0];
+        Tupla<Integer,Integer> max = heap[0];
         //Ponemos el ultimo elemento del heap(visto de izq a derecha) como el primero
         heap[0] = heap[size - 1];
         //Ponemos la ultima posicion en 0
@@ -127,7 +127,7 @@ public class maxHeap{
     }
 
     //Aplicamos el algoritmo de Floyd sobre el array ingresado
-    public void array2heap(Tupla<Integer,String>[] array){
+    public void array2heap(Tupla<Integer,Integer>[] array){
 
         // Creo que no hace falta pero lo dejo comentado por las dudas
         //Tupla<Integer,String>[] arrayConId = new Tupla[array.length];
