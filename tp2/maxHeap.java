@@ -1,16 +1,16 @@
 package aed;
+
+
 //Aca vamos a poner las clases que vamos haciendo
 
 //Debemos agregar una funcion a ColaDePrioridad que devuelve los primeros dos 
 //elementos del heap SIN SACARLOS
 
-//TAMBEIN HAY QUE IMPLEMENTAR ARRAY. Lo hacemos de tal forma que se inicialize en 0 todas las coordenadas
-
-
+//TAMBIEN HAY QUE IMPLEMENTAR ARRAY. Lo hacemos de tal forma que se inicialize en 0 todas las coordenadas
 
 //Creamos una class para un heap que ordena de mayor a menor
 public class maxHeap{
-    private int[] heap;
+    private Tupla<Integer,String>[] heap;
     private int size;
     private int cota;
 
@@ -19,7 +19,8 @@ public class maxHeap{
     public maxHeap(int cota) {
         this.cota = cota;
         this.size = 0;
-        this.heap = new int[cota];
+        this.heap = new Tupla[cota];
+
     }
 
     //Esto tiene complejidad constante, O(1)
@@ -43,13 +44,13 @@ public class maxHeap{
     
     // Esto tiene complejidad constante, O(1)
     private void swap(int i, int j) {
-        int temp = heap[i];
+        Tupla<Integer,String> temp = heap[i];
         heap[i] = heap[j];
         heap[j] = temp;
     }
 
-    // voceto de algoritmo en slide 18
-    public void encolar(int value) {
+    // boceto de algoritmo en slide 18
+    public void encolar(Tupla<Integer, String> value) {
         // O(1)
         if (size == cota) {
             // Segun la idea detras de nuestra implementacion, no deberia suceder este caso(agregar por encima de la cota)
@@ -74,7 +75,7 @@ public class maxHeap{
         // n = old(heap).size
 
         // tiene complejidad O(log(n))
-        while (posActual > 0 && heap[posActual] < heap[padre(posActual)]) {
+        while (posActual > 0 && heap[posActual].getPrimerElemento() > heap[padre(posActual)].getPrimerElemento()) {
             // Lo de adentro del while es O(1)
             swap(posActual, padre(posActual));
             posActual = padre(posActual);
@@ -82,36 +83,40 @@ public class maxHeap{
         // 
 
     }
+    // queda 4*O(1) + O(log(n)) -> Tiene complejidad O(log(n))
 
-    public int mirarMax(){
+    //O(1)
+    public Tupla<Integer,String> mirarMax(){
         return heap[0];
     }
 
 
-    public int mirarSegundo(){
-        int res;
-        if(hijoIzquierdo(0)>hijoDerecho(0)){
-            res = hijoIzquierdo(0);
+    public Tupla<Integer,String> mirarSegundo(){
+        Tupla<Integer,String> res;
+        if(heap[hijoIzquierdo(0)].getPrimerElemento() > heap[hijoDerecho(0)].getPrimerElemento()){
+            res = heap[hijoIzquierdo(0)];
         }
         else{
-            res = hijoDerecho(0);
+            res = heap[hijoDerecho(0)];
         }
 
         return res;
     }
 
-    public int extraerMax() {
+    
+    public Tupla<Integer, String> extraerMax() {
         // Este caso no deberia pasar, lo ponemos por si acaso
-        if (size == 0) {
-            return -1;
-        }
+        //if (size == 0) {
+        //}
+        
+        Tupla<Integer,String> tuplaCero = new Tupla(0,' ');
 
         // Por como esta definido nuestro heap el maximo es el primer elemento de la lsita
-        int max = heap[0];
+        Tupla max = heap[0];
         //Ponemos el ultimo elemento del heap(visto de izq a derecha) como el primero
         heap[0] = heap[size - 1];
         //Ponemos la ultima posicion en 0
-        heap[size-1] = 0;
+        heap[size-1] = tuplaCero;
         //Modifcamos el tamano de forma tal que la ultima coordenada no nos importe
         size--;
 
@@ -122,8 +127,15 @@ public class maxHeap{
     }
 
     //Aplicamos el algoritmo de Floyd sobre el array ingresado
-    public void array2heap(int[] array){
-        
+    public void array2heap(Tupla<Integer,String>[] array){
+
+        // Creo que no hace falta pero lo dejo comentado por las dudas
+        //Tupla<Integer,String>[] arrayConId = new Tupla[array.length];
+
+        //for(int i = 0; i < array.length;i++) {
+        //    arrayConId[i] = array[i];
+        //}
+
         //Ponemos el tamano y la cota del heap en el largo del array
         size = array.length;
         cota = array.length;
@@ -138,12 +150,12 @@ public class maxHeap{
         //Esto ciclo se repite n/2 - 1 y lo de adentro es O(1), es decir, es O(n)
         while( 0 <= nodoActual ){
             //Vemos si se cumple el orden en el hijo derecho
-            if(array[nodoActual] < array[hijoDerecho(nodoActual)]){
+            if(array[nodoActual].getPrimerElemento() < array[hijoDerecho(nodoActual)].getPrimerElemento()){
                 //Si no, intercambiamos los valores
                 swap(nodoActual, hijoDerecho(nodoActual));
             }
             //Vemos si se cumple el orden en el hijo derecho
-            if(array[nodoActual] < array[hijoIzquierdo(nodoActual)]){
+            if(array[nodoActual].getPrimerElemento() < array[hijoIzquierdo(nodoActual)].getPrimerElemento()){
                 //Si no, intercambiamos los valores
                 swap(nodoActual, hijoIzquierdo(nodoActual));
             }
@@ -167,10 +179,10 @@ public class maxHeap{
         int hDer = hijoDerecho(nodoActual);
         int max = nodoActual;
 
-        if (hIzq < size && heap[hIzq] > heap[max]) {
+        if (hIzq < size && heap[hIzq].getPrimerElemento() > heap[max].getPrimerElemento()) {
             max = hIzq;
         }
-        if (hDer < size && heap[hDer] > heap[max]) {
+        if (hDer < size && heap[hDer].getPrimerElemento() > heap[max].getPrimerElemento()) {
             max = hDer;
         }
 
