@@ -1,7 +1,5 @@
 package aed;
 
-//luego quitarlo al crear la clase set
-import java.util.*;
 
 public class SistemaCNE {
     // Completar atributos privados
@@ -124,21 +122,25 @@ public class SistemaCNE {
         // a tomar max
         
         // Copiamos los votos no blancos de nuestra mesa
-        int[] filaId = new int[votosDiputados.length-1];
+        Tupla<Integer,String>[] filaId = new Tupla[votosDiputados.length-1];
+
         for(int j = 0; j < votosDiputados.length-1;j++){
-            filaId = votosDiputados[j];
+            filaId[j] = new Tupla(votosDiputados[distrito][j],'j');
         }
+
+
+
         //heapifiamos
         maxHeap filaIdHeap = new maxHeap(filaId.length);
         filaIdHeap.array2heap(filaId);
 
         // Le agregamos el heap a la variable correspondiente
-        votosDiputadosXDistHeap[i] = filaIdHeap;
+        votosDiputadosXDistHeap[distrito] = filaIdHeap;
         
         //En el caso de votosPresidencialesHeap, es un unico heap, que ahora debemos actualizar
-        int[] votosPr = new int[votosPresidenciales.length-1];
+        Tupla<Integer,String>[] votosPr = new Tupla[votosPresidenciales.length-1];
         for(int j = 0; j < votosPresidenciales.length-1;j++){
-            votosPr[j] = votosPresidenciales[j];
+            votosPr[j] = new Tupla(votosPresidenciales[j],'j');
         }
         
         maxHeap votosPrHeap = new maxHeap(votosPresidenciales.length -1); //nuevamente, excluimos los votos en blanco
@@ -159,21 +161,38 @@ public class SistemaCNE {
         return votosDiputados[idDistrito][idPartido];
     }
 
-    public int[] resultadosDiputados(int idDistrito){
-        // agarro el heap correspondiente al distrito
-        // inicializo un array "res" con longitud P-1, el que voy a devolver
-        // saco el primer valor del heap, y sumo 1 al partido que corresponde a ese valor
-        // meto el valor dividido res[partido correspondiente]+1, complejidad log(P-1)
-        // esto lo repito Dd veces
-        throw new UnsupportedOperationException("No implementada aun");
+    public int[] resultadosDiputados(int idDistrito) {
+        // estas tres lineas son O(1)
+        int[] contadorCantidadDeBancas = new int[nombresPartidos.length-1];
+        int k = 0;
+        Tupla<Integer, String> max;
+
+        while (k < diputadosPorDistritos[idDistrito]) {
+            //O(1) por heap. Miramos y sacamos el maximo(1era coord)
+            max = votosDiputadosXDistHeap[idDistrito].extraerMax();
+            //Vamos a la posicion que corresponde al partido con mas votos O(1)
+            contadorCantidadDeBancas[Integer.parseInt(max.getSegundoElemento())]++;
+            //Dividimos el maximo segun Dhont y encolamos la tupla con la division y su id 
+
+            //complejidad O(log(n))
+            votosDiputadosXDistHeap[idDistrito].encolar(new Tupla<>(
+            votosDiputados[idDistrito][max.getPrimerElemento()] /
+            contadorCantidadDeBancas[Integer.parseInt(max.getSegundoElemento())] ,
+            max.getSegundoElemento()));
+            k++;
+        }
+
+        //El codigo dentro del while tiene complejidad O(log(n)) y se repite Dd veces
+        // tiene complejidad Dd*(log(n))
+
+        //O(1)
+        return contadorCantidadDeBancas;
+        
     }
 
-    public boolean hayBallotage(){
-        //aca necesitamos metodos q nos devuelvan el primero y segundo de heapPresidentes <- estan implementados en maxHeap
-        //float porcetajeA= (heapPresidentes.primero()*100)/totalVotos;
-        //float porcetajeB= (heapPresidentes.segundo()*100)/totalVotos;
-        //return !(porcetajeA>=45 || (porcetajeA>=40&& (porcetajeA-porcetajeB)>10));
-        throw new UnsupportedOperationException("No implementada aun");
+    public boolean hayBallotage() {
+        float porcentajeA = (votosPresidencialesHeap.mirarMax().getPrimerElemento() * 100) / totalVotos;
+        float porcentajeB = (votosPresidencialesHeap.mirarSegundo().getPrimerElemento() * 100) / totalVotos;
+        return !(porcentajeA >= 45 || (porcentajeA >= 40 && (porcentajeA - porcentajeB) > 10));
     }
 }
-
