@@ -193,22 +193,23 @@ public class SistemaCNE {
         
         if(calcDip[idDistrito] == false){
             // estas tres lineas son O(1)
-            // creamos una copia del heap para no modificar los datos que tenemos
+            // creamos una copia del heap para no modificar los datos que tenemos    Chequqear complejidad!!!
             maxHeap heap = new maxHeap(nombresPartidos.length);
             heap.copyHeap(votosDiputadosXDistHeap[idDistrito]);
             int cantidad=diputadosPorDistritos[idDistrito];
             int[] contadorCantidadDeBancas = new int[nombresPartidos.length-1];   
 
             int k = 0;
-            while (k < cantidad) {
+            while (k < cantidad-1) {
                 //O(1) por heap. Miramos y sacamos el maximo(1era coord)
                 float[] max = heap.extraerMax();
                 //Vamos a la posicion que corresponde al partido con mas votos O(1)
+
                 contadorCantidadDeBancas[Math.round(max[1])]=contadorCantidadDeBancas[Math.round(max[1])]+ 1;
                 //Dividimos el maximo segun Dhont y encolamos la tupla con la division y su id 
 
                 //complejidad O(log(n))
-                float division = votosDiputados[idDistrito][Math.round(max[1])] / contadorCantidadDeBancas[Math.round(max[1])]+1;
+                float division = (votosDiputados[idDistrito][Math.round(max[1])])/(contadorCantidadDeBancas[Math.round(max[1])]+1);//agregarmos parentesis
                 float[] temp={division, max[1]};
                 heap.encolar(temp);
                 k++;
@@ -225,3 +226,5 @@ public class SistemaCNE {
         return !(porcentajeA >= 45 || (porcentajeA >= 40 && (porcentajeA - porcentajeB) > 10));
     }
 }
+
+
