@@ -19,6 +19,7 @@ public class maxHeap{
     public maxHeap(int cota) {
         this.cota = cota;
         this.size = 0;
+        //El ID es el segundo 
         this.heap = new float[cota][2];
 
     }
@@ -87,8 +88,8 @@ public class maxHeap{
         // n = old(heap).size
 
         // tiene complejidad O(log(n))
-        while (posActual > 0 && heap[posActual][0] > heap[padre(posActual)][0]) {
-            // Lo de adentro del while es O(1)
+        while (posActual > 0 && heap[posActual][0] > heap[padre(posActual)][0]){
+            // Lo de adentro del while es O(1) 
             swap(posActual, padre(posActual));
             posActual = padre(posActual);
         }
