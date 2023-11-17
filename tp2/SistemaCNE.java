@@ -20,7 +20,14 @@ public class SistemaCNE {
     maxHeap[] votosDiputadosXDistHeap;
     
     int[] mesasRegistradas;
+    // total de votos
     int totalVotos;
+    // total de votos por distrito
+    int[] totalVotosDist;
+    //lista de booleans para saber si ya calcule los resultados de los diputados
+    boolean[] calcDip;
+    // resultados de diputados
+    int[][] resDip;
 
     
 
@@ -53,9 +60,12 @@ public class SistemaCNE {
         this.votosDiputados= new int[nombresDistritos.length][nombresPartidos.length];
         this.mesasRegistradas= new int[0];
         this.totalVotos=0;
+        this.totalVotosDist= new int[nombresDistritos.length];
         //inicializar los heaps
         this.votosDiputadosXDistHeap = new maxHeap[nombresDistritos.length];
-        this.votosPresidencialesHeap = new maxHeap(votosPresidenciales.length);
+        this.votosPresidencialesHeap = new maxHeap(votosPresidenciales.length-1);
+        this.calcDip = new boolean[nombresDistritos.length];
+        this.resDip = new int[nombresDistritos.length][nombresPartidos.length];
     }
 
     public String nombrePartido(int idPartido) {
@@ -114,37 +124,52 @@ public class SistemaCNE {
             votosDiputados[distrito][i]=votosDiputados[distrito][i]+actaMesa[i].votosDiputados();
             votosPresidenciales[i]=votosPresidenciales[i]+actaMesa[i].votosPresidente();
             totalVotos=totalVotos+actaMesa[i].votosPresidente();
+            totalVotosDist[distrito]=totalVotosDist[distrito]+actaMesa[i].votosDiputados();
             i++;
         }
+        calcDip[distrito]=false;
         // Tomamos la fila de la matriz votosDiputados que acabamos de actualizar, i.e. la fila indiceDeMesa(idMesa)
         // y la transformamos en un heap. Complejidad O(P)
         // Ojo! NO tienen que estar los votos en blanco en los heaps de votos de partido x districto, porque les vamos 
         // a tomar max
         
         // Copiamos los votos no blancos de nuestra mesa
-        Tupla<Integer,Integer>[] filaId = new Tupla[nombresPartidos.length-1]; // :)
+        float[][] filaId = new float[nombresPartidos.length-1][2];
 
         for(int j = 0; j < nombresPartidos.length-1;j++){
-            filaId[j] = new Tupla(votosDiputados[distrito][j],j);
+            if(votosDiputados[distrito][j]*100/totalVotosDist[distrito] >=3){
+                float[] temp={votosDiputados[distrito][j],j};
+                filaId[j] = temp;
+            } else {
+                filaId[j] = new float[]{-1,j};
+            }
+            
         }
 
 
 
-        //heapifiamos
+        //Creamos el heap para copiar la  info
         maxHeap filaIdHeap = new maxHeap(filaId.length);
-        filaIdHeap.array2heap(filaId);
+        // Le asignamos el array como heap SIN HEAPFIAR
+        filaIdHeap.defHeap(filaId);
+        // Heapfiamos el array que esta en el observador heap de filaIdHeap
+        filaIdHeap.heapfiear();
 
         // Le agregamos el heap a la variable correspondiente
         votosDiputadosXDistHeap[distrito] = filaIdHeap;
-        
+        /*
+        votosDiputadosXDistHeap[distrito].defHeap(filaId);
+        votosDiputadosXDistHeap[distrito].heapfiear();*/
         //En el caso de votosPresidencialesHeap, es un unico heap, que ahora debemos actualizar
-        Tupla<Integer,Integer>[] votosPr = new Tupla[votosPresidenciales.length-1];
+        float[][] votosPr = new float[votosPresidenciales.length-1][2];
         for(int j = 0; j < votosPresidenciales.length-1;j++){
-            votosPr[j] = new Tupla(votosPresidenciales[j],j);
+            float[] temp={votosPresidenciales[j],j};
+            votosPr[j] = temp;
         }
         
         maxHeap votosPrHeap = new maxHeap(votosPresidenciales.length -1); //nuevamente, excluimos los votos en blanco
-        votosPrHeap.array2heap(votosPr);
+        votosPrHeap.defHeap(votosPr);
+        votosPrHeap.heapfiear();
         
         votosPresidencialesHeap = votosPrHeap;
 
@@ -161,38 +186,42 @@ public class SistemaCNE {
         return votosDiputados[idDistrito][idPartido];
     }
 
+    // el primer test con hacer que no sea por referencia anda
+    // en el tercero hay que ver el umbral
+
     public int[] resultadosDiputados(int idDistrito) {
-        // estas tres lineas son O(1)
-        int[] contadorCantidadDeBancas = new int[nombresPartidos.length-1];
-        int k = 0;
-        Tupla<Integer, Integer> max; // :)
-
-        while (k < diputadosPorDistritos[idDistrito]) { 
-            //O(1) por heap. Miramos y sacamos el maximo(1era coord)
-            max = votosDiputadosXDistHeap[idDistrito].extraerMax();
-            //Vamos a la posicion que corresponde al partido con mas votos O(1)
-            contadorCantidadDeBancas[max.getSegundoElemento()]++;
-            //Dividimos el maximo segun Dhont y encolamos la tupla con la division y su id 
-
-            //complejidad O(log(n))
-            votosDiputadosXDistHeap[idDistrito].encolar(new Tupla<>(
-            votosDiputados[idDistrito][max.getSegundoElemento()] /
-            (contadorCantidadDeBancas[max.getSegundoElemento()]+1),
-            max.getSegundoElemento()));
-            k++;
-        }
-
-        //El codigo dentro del while tiene complejidad O(log(n)) y se repite Dd veces
-        // tiene complejidad Dd*(log(n))
-
-        //O(1)
-        return contadorCantidadDeBancas;
         
+        if(calcDip[idDistrito] == false){
+            // estas tres lineas son O(1)
+            // creamos una copia del heap para no modificar los datos que tenemos
+            maxHeap heap = new maxHeap(nombresPartidos.length);
+            heap.copyHeap(votosDiputadosXDistHeap[idDistrito]);
+            int cantidad=diputadosPorDistritos[idDistrito];
+            int[] contadorCantidadDeBancas = new int[nombresPartidos.length-1];   
+
+            int k = 0;
+            while (k < cantidad) {
+                //O(1) por heap. Miramos y sacamos el maximo(1era coord)
+                float[] max = heap.extraerMax();
+                //Vamos a la posicion que corresponde al partido con mas votos O(1)
+                contadorCantidadDeBancas[Math.round(max[1])]=contadorCantidadDeBancas[Math.round(max[1])]+ 1;
+                //Dividimos el maximo segun Dhont y encolamos la tupla con la division y su id 
+
+                //complejidad O(log(n))
+                float division = votosDiputados[idDistrito][Math.round(max[1])] / contadorCantidadDeBancas[Math.round(max[1])]+1;
+                float[] temp={division, max[1]};
+                heap.encolar(temp);
+                k++;
+            }
+            resDip[idDistrito]=contadorCantidadDeBancas;
+            calcDip[idDistrito]=true;
+        }
+        return resDip[idDistrito];
     }
 
     public boolean hayBallotage() {
-        float porcentajeA = (votosPresidencialesHeap.mirarMax().getPrimerElemento() * 100) / totalVotos;
-        float porcentajeB = (votosPresidencialesHeap.mirarSegundo().getPrimerElemento() * 100) / totalVotos;
+        float porcentajeA = (Math.round(votosPresidencialesHeap.mirarMax()[0]) * 100) / totalVotos;
+        float porcentajeB = (Math.round(votosPresidencialesHeap.mirarSegundo()[0]) * 100) / totalVotos;
         return !(porcentajeA >= 45 || (porcentajeA >= 40 && (porcentajeA - porcentajeB) > 10));
     }
 }
