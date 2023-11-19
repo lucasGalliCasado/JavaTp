@@ -1,109 +1,125 @@
 package aed;
 
+    // Para los invariantes asumir que cada línea es un &&.
+
+    /*
+     * InvRep (SistemaCNE):    
+     
+     * nombrePartidos:
+     *
+     * 
+     * 
+     */
 
 public class SistemaCNE {
     // Completar atributos privados
 
-    String[] nombresPartidos;
-    String[] nombresDistritos;
-    int[] diputadosPorDistritos;
-    int[] rangoMesasDistritosInf;
-    int[] rangoMesasDistritosSup;
+    String[] nombresPartidos; //O(1)
+    String[] nombresDistritos;//O(1)
+    int[] diputadosPorDistritos;//O(1)
+    int[] rangoMesasDistritosInf;//O(1)
+    int[] rangoMesasDistritosSup;//O(1)
     
-    int[] votosPresidenciales;
+    int[] votosPresidenciales;//O(1)
     // heap con los votos presidenciales de cada partido 
-    maxHeap votosPresidencialesHeap;
+    maxHeap votosPresidencialesHeap;//O(1)
     // matriz M donde Mij = votos del partido j en el districto i para los diputados 
-    int[][] votosDiputados;
+    int[][] votosDiputados;//O(1)
     // Lista de heaps para cada districto, donde cada heap tendra los votos de diputados de cada partido en
     // ese districto
-    maxHeap[] votosDiputadosXDistHeap;
+    maxHeap[] votosDiputadosXDistHeap;//O(1)
     
-    boolean[] mesasRegistradas;
+    boolean[] mesasRegistradas;//O(1)
     // total de votos
-    int totalVotos;
+    int totalVotos;//O(1)
     // total de votos por distrito
-    int[] totalVotosDist;
+    int[] totalVotosDist;//O(1)
     //lista de booleans para saber si ya calcule los resultados de los diputados
-    boolean[] calcDip;
+    boolean[] calcDip;//O(1)
     // resultados de diputados
-    int[][] resDip;
-
+    int[][] resDip;//O(1)
+    
+    /*
+     * InvRep (VotosPartido):
+     * 
+     * presidente >= 0
+     * diputados >= 0
+     */
     public class VotosPartido{
-        private int presidente;
-        private int diputados;
-        VotosPartido(int presidente, int diputados){this.presidente = presidente; this.diputados = diputados;}
-        public int votosPresidente(){return presidente;}
-        public int votosDiputados(){return diputados;}
+        private int presidente;//O(1)
+        private int diputados;//O(1)
+        VotosPartido(int presidente, int diputados){this.presidente = presidente; this.diputados = diputados;}//O(1)
+        public int votosPresidente(){return presidente;}//O(1)
+        public int votosDiputados(){return diputados;}//O(1)
     }   
 
     public SistemaCNE(String[] nombresDistritos, int[] diputadosPorDistrito, String[] nombresPartidos, int[] ultimasMesasDistritos) {
-        this.nombresDistritos=nombresDistritos;
-        this.nombresPartidos=nombresPartidos;
-        this.diputadosPorDistritos=diputadosPorDistrito;
-        this.rangoMesasDistritosSup=ultimasMesasDistritos;
-        this.rangoMesasDistritosInf= new int[ultimasMesasDistritos.length];
-        rangoMesasDistritosInf[0]=0;
-        int i=1;
-        while(i<ultimasMesasDistritos.length){
-            rangoMesasDistritosInf[i]=ultimasMesasDistritos[i-1];
+        this.nombresDistritos=nombresDistritos; // O(1)
+        this.nombresPartidos=nombresPartidos;// O(1)
+        this.diputadosPorDistritos=diputadosPorDistrito; //O(1)
+        this.rangoMesasDistritosSup=ultimasMesasDistritos;// O(1)
+        this.rangoMesasDistritosInf= new int[ultimasMesasDistritos.length];//O(D) 
+        rangoMesasDistritosInf[0]=0;//O(1)
+        int i=1;// O(1)
+        while(i<ultimasMesasDistritos.length){ //O(D)
+            rangoMesasDistritosInf[i]=ultimasMesasDistritos[i-1];// O(1) 
             i++;
         }
         // Se inicializa en cero por predeterminado en java tenemos que hacer q nuestro tipo array haga lo mismo
-        this.votosPresidenciales= new int[nombresPartidos.length];
-        this.votosDiputados= new int[nombresDistritos.length][nombresPartidos.length];
-        this.mesasRegistradas= new boolean[ultimasMesasDistritos[ultimasMesasDistritos.length-1]-1];
-        this.totalVotos=0;
-        this.totalVotosDist= new int[nombresDistritos.length];
+        this.votosPresidenciales= new int[nombresPartidos.length]; // O(P)
+        this.votosDiputados= new int[nombresDistritos.length][nombresPartidos.length]; //O(PxD)
+        this.mesasRegistradas= new boolean[ultimasMesasDistritos[ultimasMesasDistritos.length-1]-1]; //corregir
+        this.totalVotos=0;// O(1)
+        this.totalVotosDist= new int[nombresDistritos.length];//O(D)
         //inicializar los heaps
-        this.votosDiputadosXDistHeap = new maxHeap[nombresDistritos.length];
-        this.votosPresidencialesHeap = new maxHeap(votosPresidenciales.length-1);
-        this.calcDip = new boolean[nombresDistritos.length];
-        this.resDip = new int[nombresDistritos.length][nombresPartidos.length];
+        this.votosDiputadosXDistHeap = new maxHeap[nombresDistritos.length];//O(D)
+        this.votosPresidencialesHeap = new maxHeap(votosPresidenciales.length-1);// O(P-1) --> O(P)
+        this.calcDip = new boolean[nombresDistritos.length]; //O(D)
+        this.resDip = new int[nombresDistritos.length][nombresPartidos.length]; //O(DxP)
     }
 
     public String nombrePartido(int idPartido) {
-        return nombresPartidos[idPartido];
+        return nombresPartidos[idPartido];//O(1)
     }
 
     public String nombreDistrito(int idDistrito) {
-        return nombresDistritos[idDistrito];
+        return nombresDistritos[idDistrito]; //O(1)
     }
 
     public int diputadosEnDisputa(int idDistrito) {
-        return diputadosPorDistritos[idDistrito];
+        return diputadosPorDistritos[idDistrito]; //O(1)
     }
 
     //Dado un idMesa, busca a que disrito pertenece, y el lugar del mismo en nombresDistritos
     private int indiceDeMesa(int idMesa) {
-        int izquierda = 0;
-        int derecha = rangoMesasDistritosSup.length - 1;
+        int izquierda = 0; //O(1)
+        int derecha = rangoMesasDistritosSup.length - 1;//O(1)
 
-        while (izquierda <= derecha) {
+        while (izquierda <= derecha) { //O(log(D)) busqueda binaria
 
             //medio nos dice el numero del distrito en el que estamos mirando
-            int medio = izquierda + (derecha - izquierda) / 2;
+            int medio = izquierda + (derecha - izquierda) / 2; //O(1)
 
             // Si idMesa corresponde a [rangoInf[medio],rangoSup[medio]) retorna medio
-            if (rangoMesasDistritosSup[medio] > idMesa && rangoMesasDistritosInf[medio]<=idMesa) {
-                return medio;
+            if (rangoMesasDistritosSup[medio] > idMesa && rangoMesasDistritosInf[medio]<=idMesa) { //O(1) 
+                return medio;//O(1)
             }
 
             // Si idMesa es mas grande que el limite Sup a medio entonces descartamos la mitad de abajo
-            if (rangoMesasDistritosSup[medio] <= idMesa) {
-                izquierda = medio + 1;
+            if (rangoMesasDistritosSup[medio] <= idMesa) {//O(1)
+                izquierda = medio + 1;//O(1)
             }
 
             // Si idMesa es mas chico que el limite Inf a medio entonces descartamos la mitad de arriba
             else {
-                derecha = medio - 1;
+                derecha = medio - 1;//O(1)
             }
         }
-        return -1;
+        return -1;//O(1)
     }
 
     public String distritoDeMesa(int idMesa) {
-        return nombreDistrito(indiceDeMesa(idMesa));
+        return nombreDistrito(indiceDeMesa(idMesa));//O(log D)
     }
 
     public void registrarMesa(int idMesa, VotosPartido[] actaMesa) {
@@ -113,30 +129,30 @@ public class SistemaCNE {
 
         //sobre la matriz votosDiputados sumamos los votos de cada partido
         // del districto dado, i.e. sumamos la fila de votos de diputados.  complejidad O(P)
-        int i=0;
-        while(i<nombresPartidos.length){
-            votosDiputados[distrito][i]=votosDiputados[distrito][i]+actaMesa[i].votosDiputados();
-            votosPresidenciales[i]=votosPresidenciales[i]+actaMesa[i].votosPresidente();
-            totalVotos=totalVotos+actaMesa[i].votosPresidente();
-            totalVotosDist[distrito]=totalVotosDist[distrito]+actaMesa[i].votosDiputados();
-            i++;
+        int i=0; //O(1)
+        while(i<nombresPartidos.length){//O(P)
+            votosDiputados[distrito][i]=votosDiputados[distrito][i]+actaMesa[i].votosDiputados(); //O(1)
+            votosPresidenciales[i]=votosPresidenciales[i]+actaMesa[i].votosPresidente();//O(1)
+            totalVotos=totalVotos+actaMesa[i].votosPresidente();//O(1)
+            totalVotosDist[distrito]=totalVotosDist[distrito]+actaMesa[i].votosDiputados();//O(1)
+            i++;//O(1)
         }
-        calcDip[distrito]=false;
-        resDip[distrito]= new int[nombresPartidos.length-1];
+        calcDip[distrito]=false;// O(1)
+        resDip[distrito]= new int[nombresPartidos.length-1];//O(P-1)
         // Tomamos la fila de la matriz votosDiputados que acabamos de actualizar, i.e. la fila indiceDeMesa(idMesa)
         // y la transformamos en un heap. Complejidad O(P)
         // Ojo! NO tienen que estar los votos en blanco en los heaps de votos de partido x districto, porque les vamos 
         // a tomar max
         
         // Copiamos los votos no blancos de nuestra mesa
-        float[][] filaId = new float[nombresPartidos.length-1][2];
+        float[][] filaId = new float[nombresPartidos.length-1][2]; //O((P-1)x2) --> //O(P)
 
-        for(int j = 0; j < nombresPartidos.length-1;j++){
-            if(votosDiputados[distrito][j]*100/totalVotosDist[distrito] >=3){
-                float[] temp={votosDiputados[distrito][j],j};
-                filaId[j] = temp;
+        for(int j = 0; j < nombresPartidos.length-1;j++){ //O(P)
+            if(votosDiputados[distrito][j]*100/totalVotosDist[distrito] >=3){ // O(1)
+                float[] temp={votosDiputados[distrito][j],j}; //O(1)
+                filaId[j] = temp;//O(1)
             } else {
-                filaId[j] = new float[]{-1,j};
+                filaId[j] = new float[]{-1,j};//O(1)
             }
             
         }
@@ -144,67 +160,68 @@ public class SistemaCNE {
 
 
         //Creamos el heap para copiar la  info
-        maxHeap filaIdHeap = new maxHeap(filaId.length);
+        maxHeap filaIdHeap = new maxHeap(filaId.length);//O(P)
         // Le asignamos el array como heap SIN HEAPFIAR
-        filaIdHeap.defHeap(filaId);
+        filaIdHeap.defHeap(filaId);//O(P)
         // Heapfiamos el array que esta en el observador heap de filaIdHeap
-        filaIdHeap.heapfiear();
+        filaIdHeap.heapfiear();//O(P)
 
         // Le agregamos el heap a la variable correspondiente
-        votosDiputadosXDistHeap[distrito] = filaIdHeap;
+        votosDiputadosXDistHeap[distrito] = filaIdHeap; //O(P)
         
         //En el caso de votosPresidencialesHeap, es un unico heap, que ahora debemos actualizar
-        float[][] votosPr = new float[votosPresidenciales.length-1][2];
-        for(int j = 0; j < votosPresidenciales.length-1;j++){
-            float[] temp={votosPresidenciales[j],j};
-            votosPr[j] = temp;
+        float[][] votosPr = new float[votosPresidenciales.length-1][2]; //O(P)
+        for(int j = 0; j < votosPresidenciales.length-1;j++){ //O(P)
+            float[] temp={votosPresidenciales[j],j};//O(1)
+            votosPr[j] = temp;//O(1)
         }
         
-        maxHeap votosPrHeap = new maxHeap(votosPresidenciales.length -1); //nuevamente, excluimos los votos en blanco
-        votosPrHeap.defHeap(votosPr);
-        votosPrHeap.heapfiear();
+        maxHeap votosPrHeap = new maxHeap(votosPresidenciales.length -1); //nuevamente, excluimos los votos en blanco O(P)
+        votosPrHeap.defHeap(votosPr);//O(P)
+        votosPrHeap.heapfiear();//O(P)
         
-        votosPresidencialesHeap = votosPrHeap;
+        votosPresidencialesHeap = votosPrHeap;//O(1)
 
 
-        mesasRegistradas[idMesa]=true;
+        mesasRegistradas[idMesa]=true;//O(1)
     }
 
     public int votosPresidenciales(int idPartido) {
-        return votosPresidenciales[idPartido];
+        return votosPresidenciales[idPartido];//O(1)
     }
 
     public int votosDiputados(int idPartido, int idDistrito) {
-        return votosDiputados[idDistrito][idPartido];
+        return votosDiputados[idDistrito][idPartido];//O(1)
     }
 
     public int[] resultadosDiputados(int idDistrito) {
         
-        if(calcDip[idDistrito] == false){
+        if(calcDip[idDistrito] == false){//O(1)
             
-            int cantidad=diputadosPorDistritos[idDistrito];  
+            int cantidad=diputadosPorDistritos[idDistrito];  //O(1)
 
-            int k = 0;
-            while (k < cantidad) {
+            int k = 0;//O(1)
+            while (k < cantidad) {//O(Dd)
                 //O(1) por heap. Miramos y sacamos el maximo(1era coord)
                 float[] max = votosDiputadosXDistHeap[idDistrito].extraerMax();
                 //Vamos a la posicion que corresponde al partido con mas votos O(1)
                 resDip[idDistrito][Math.round(max[1])]=resDip[idDistrito][Math.round(max[1])]+ 1;
                 //Dividimos el maximo segun Dhont y encolamos la tupla con la division y su id 
                 //complejidad O(log(n))
-                float division = votosDiputados[idDistrito][Math.round(max[1])] / (resDip[idDistrito][Math.round(max[1])]+1);
-                float[] temp={division, max[1]};
-                votosDiputadosXDistHeap[idDistrito].encolar(temp);
+                float division = votosDiputados[idDistrito][Math.round(max[1])] / (resDip[idDistrito][Math.round(max[1])]+1);//O(1)
+                float[] temp={division, max[1]};//O(1)
+                votosDiputadosXDistHeap[idDistrito].encolar(temp); //O(log(D)) 
                 k++;
             }
-            calcDip[idDistrito]=true;
+            calcDip[idDistrito]=true;//O(1)
         }
-        return resDip[idDistrito];
+        return resDip[idDistrito];//O(1)
     }
 
     public boolean hayBallotage() {
-        float porcentajeA = (Math.round(votosPresidencialesHeap.mirarMax()[0]) * 100) / totalVotos;
-        float porcentajeB = (Math.round(votosPresidencialesHeap.mirarSegundo()[0]) * 100) / totalVotos;
-        return !(porcentajeA >= 45 || (porcentajeA >= 40 && (porcentajeA - porcentajeB) > 10));
+        float porcentajeA = (Math.round(votosPresidencialesHeap.mirarMax()[0]) * 100) / totalVotos; // O(1)
+        float porcentajeB = (Math.round(votosPresidencialesHeap.mirarSegundo()[0]) * 100) / totalVotos;// O(1)
+        return !(porcentajeA >= 45 || (porcentajeA >= 40 && (porcentajeA - porcentajeB) > 10));// O(1)
     }
 }
+
