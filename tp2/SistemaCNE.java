@@ -67,7 +67,7 @@ public class SistemaCNE {
         }
         // Se inicializa en cero por predeterminado en java tenemos que hacer q nuestro tipo array haga lo mismo
         this.votosPresidenciales= new int[nombresPartidos.length]; // O(P)
-        this.votosDiputados= new int[nombresDistritos.length][nombresPartidos.length]; //O(PxD)
+        this.votosDiputados= new int[nombresDistritos.length][nombresPartidos.length]; //O(DxP)
         this.mesasRegistradas= new boolean[ultimasMesasDistritos[ultimasMesasDistritos.length-1]-1]; //corregir
         this.totalVotos=0;// O(1)
         this.totalVotosDist= new int[nombresDistritos.length];//O(D)
@@ -210,7 +210,7 @@ public class SistemaCNE {
                 //complejidad O(log(n))
                 float division = votosDiputados[idDistrito][Math.round(max[1])] / (resDip[idDistrito][Math.round(max[1])]+1);//O(1)
                 float[] temp={division, max[1]};//O(1)
-                votosDiputadosXDistHeap[idDistrito].encolar(temp); //O(log(D)) 
+                votosDiputadosXDistHeap[idDistrito].encolar(temp); //O(log(P)) 
                 k++;
             }
             calcDip[idDistrito]=true;//O(1)
