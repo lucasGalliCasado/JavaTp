@@ -46,8 +46,8 @@ public class SistemaCNE {
      * diputados >= 0
      */
     public class VotosPartido{
-        private int presidente;//O(1)
-        private int diputados;//O(1)
+        private int presidente;
+        private int diputados;
         VotosPartido(int presidente, int diputados){this.presidente = presidente; this.diputados = diputados;}//O(1)
         public int votosPresidente(){return presidente;}//O(1)
         public int votosDiputados(){return diputados;}//O(1)
