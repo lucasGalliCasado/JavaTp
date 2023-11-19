@@ -14,30 +14,30 @@ package aed;
 public class SistemaCNE {
     // Completar atributos privados
 
-    String[] nombresPartidos; //O(1)
-    String[] nombresDistritos;//O(1)
-    int[] diputadosPorDistritos;//O(1)
-    int[] rangoMesasDistritosInf;//O(1)
-    int[] rangoMesasDistritosSup;//O(1)
+    String[] nombresPartidos; 
+    String[] nombresDistritos;
+    int[] diputadosPorDistritos;
+    int[] rangoMesasDistritosInf;
+    int[] rangoMesasDistritosSup;
     
-    int[] votosPresidenciales;//O(1)
+    int[] votosPresidenciales;
     // heap con los votos presidenciales de cada partido 
-    maxHeap votosPresidencialesHeap;//O(1)
+    maxHeap votosPresidencialesHeap;
     // matriz M donde Mij = votos del partido j en el districto i para los diputados 
-    int[][] votosDiputados;//O(1)
+    int[][] votosDiputados;
     // Lista de heaps para cada districto, donde cada heap tendra los votos de diputados de cada partido en
     // ese districto
-    maxHeap[] votosDiputadosXDistHeap;//O(1)
+    maxHeap[] votosDiputadosXDistHeap;
     
-    boolean[] mesasRegistradas;//O(1)
+    boolean[] mesasRegistradas;
     // total de votos
-    int totalVotos;//O(1)
+    int totalVotos;
     // total de votos por distrito
-    int[] totalVotosDist;//O(1)
+    int[] totalVotosDist;
     //lista de booleans para saber si ya calcule los resultados de los diputados
-    boolean[] calcDip;//O(1)
+    boolean[] calcDip;
     // resultados de diputados
-    int[][] resDip;//O(1)
+    int[][] resDip;
     
     /*
      * InvRep (VotosPartido):
