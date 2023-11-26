@@ -1,13 +1,6 @@
 package aed;
 
 
-//Aca vamos a poner las clases que vamos haciendo
-
-//Debemos agregar una funcion a ColaDePrioridad que devuelve los primeros dos 
-//elementos del heap SIN SACARLOS
-
-//TAMBIEN HAY QUE IMPLEMENTAR ARRAY. Lo hacemos de tal forma que se inicialize en 0 todas las coordenadas
-
 //Creamos una class para un heap que ordena de mayor a menor
 public class maxHeap{
     private float[][] heap;
@@ -15,101 +8,90 @@ public class maxHeap{
     private int cota;
 
     //Creamos un heap nuevo sin elementos
-    // Esto tiene complejidad constante, O(1)
+    // Complejidad: O(Cota)
     public maxHeap(int cota) {
-        this.cota = cota;
-        this.size = 0;
-        this.heap = new float[cota][2];
+        this.cota = cota; // O(1)
+        this.size = 0;// O(1)
+        this.heap = new float[cota][2]; //O(Cota*2)= O(Cota)
 
     }
 
+   // Complejidad : O(1)
     public void defHeap(float[][] array){
-        this.heap = array;
-        this.size = array.length;
+        this.heap = array;//O(1)
+        this.size = array.length;//O(1)
     } 
 
+    // Complejidad: O(1)
     public void copyHeap(maxHeap h){
-        cota = h.cota;
-        size = h.size;
-        heap = h.heap;
+        cota = h.cota;// O(1)
+        size = h.size;// O(1)
+        heap = h.heap;// O(1)
     }
 
-
-    //Esto tiene complejidad constante, O(1)
-    // Esto es la inversa de la funcion p(v) (ver slide 13) que nos dice la posicion de 
-    // un nodo en base a su padre
+    //Complejidad: O(1)
     private int padre(int index) {
         // Al hacer division entera (equiv a dividir y tomar parte entera) no nos importa si es
         // el hijo izquierdo o derecho del padre al cual queremos volver
-        return (index - 1) / 2;
+        return (index - 1) / 2;// O(1)
     }
 
-    // Esto tiene complejidad constante, O(1)
+    //Complejidad: O(1)
     private int hijoIzquierdo(int index) {
-        return 2 * index + 1;
+        return 2 * index + 1;// O(1)
     }
 
-    // Esto tiene complejidad constante, O(1)
+    // Complejidad: O(1)
     private int hijoDerecho(int index) {
-        return 2 * index + 2;
+        return 2 * index + 2; //O(1)
     }
     
-    // Esto tiene complejidad constante, O(1)
+    // Complejidad : O(1)
     private void swap(int i, int j) {
-        float[] temp = heap[i];
-        heap[i] = heap[j];
-        heap[j] = temp;
+        float[] temp = heap[i];// O(1)
+        heap[i] = heap[j];// O(1)
+        heap[j] = temp;// O(1)
     }
 
-    // boceto de algoritmo en slide 18
+    //Complejidad : O(log n) +4*O(1) = O(log n)
     public void encolar(float[] value) {
-        // O(1)
-        if (size == cota) {
-            // Segun la idea detras de nuestra implementacion, no deberia suceder este caso(agregar por encima de la cota)
-            // asi que simplemente lo dejamos en return
+        
+        if (size == cota) {// O(1)            
             return;
         }
 
         // Agregamos el nuevo elemento al final del heap
-        // O(1)
-        heap[size] = value;
-        //Nos paramos en el elemento que recien ingresamos
-        // O(1)
-        int posActual = size;
-        //aumentamos el tamano del heap
-        // O(1)
-        size++;
+        
+        heap[size] = value;// O(1)
+       
+        int posActual = size; // O(1)
         
         
-        // Restaurar la propiedad de heap (heapify hacia arriba)
-        // Es decir, si Padre < Hijo, los swapeamos
-
-        // n = old(heap).size
-
-        // tiene complejidad O(log(n))
-        while (posActual > 0 && heap[posActual][0] > heap[padre(posActual)][0]) {
-            // Lo de adentro del while es O(1)
-            swap(posActual, padre(posActual));
-            posActual = padre(posActual);
+        size++;// O(1)   
+        
+        while (posActual > 0 && heap[posActual][0] > heap[padre(posActual)][0]) {//O(log n)           
+            swap(posActual, padre(posActual));// O(1)
+            posActual = padre(posActual);//O(1)
         }
-        // 
+         
 
     }
-    // queda 4*O(1) + O(log(n)) -> Tiene complejidad O(log(n))
+   
 
-    //O(1)
+    //Complejidad :O(1)
     public float[] mirarMax(){
-        return heap[0];
+        return heap[0];//O(1)
     }
 
 
+    // Complejidad :  O(1)
     public float[] mirarSegundo(){
         float[] res;
-        if(heap[hijoIzquierdo(0)][0] > heap[hijoDerecho(0)][0]){
-            res = heap[hijoIzquierdo(0)];
+        if(heap[hijoIzquierdo(0)][0] > heap[hijoDerecho(0)][0]){//O(1)
+            res = heap[hijoIzquierdo(0)];//O(1)
         }
         else{
-            res = heap[hijoDerecho(0)];
+            res = heap[hijoDerecho(0)];//O(1)
         }
 
         return res;
@@ -213,3 +195,4 @@ public class maxHeap{
 
 
 //Para transformar un array a un heap usar heapify up, algortimo de Floyd
+
