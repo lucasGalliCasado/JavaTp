@@ -1,3 +1,30 @@
+/* 
+*boolean[ultimasMesasDistritos[ultimasMesasDistritos.length-1]-1]
+¿Que complejidad tiene? Esto hace que la primera funcion no cumpla con la complejidad que se pidio.
+
+listo, recordar agregar el invariante de esta
+
+
+*Esta bien que pusieron la complejidad linea a linea de las funciones pero ¿En total que complejidad termina teniendo?
+
+listo
+
+*this.heap = new float[cota][2];
+La complejidad en este caso depende de "cota"
+
+listo
+
+*¿Los atributos de la clase SistemaCNE son publicos o privados?
+
+listo
+
+*Dejaron algunos comentarios que creo que eran entre ustedes mientras hacian el tp, pero que en la entrega no deberian estar.
+
+
+
+*Faltó modularizacion
+*/
+
 package aed;
  
 
@@ -18,7 +45,7 @@ public class SistemaCNE {
     // ese districto
     private maxHeap[] votosDiputadosXDistHeap;
     
-    private boolean[] mesasRegistradas;
+    private ListaEnlazada mesasRegistradas;
     // total de votos
     private int totalVotos;
     // total de votos por distrito
@@ -28,12 +55,6 @@ public class SistemaCNE {
     // resultados de diputados
     private int[][] resDip;
     
-    /*
-     * InvRep (VotosPartido):
-     * 
-     * presidente >= 0
-     * diputados >= 0
-     */
     public class VotosPartido{
         private int presidente;
         private int diputados;
@@ -54,13 +75,11 @@ public class SistemaCNE {
             rangoMesasDistritosInf[i]=ultimasMesasDistritos[i-1];// O(1) 
             i++;
         }
-        // Se inicializa en cero por predeterminado en java tenemos que hacer q nuestro tipo array haga lo mismo
         this.votosPresidenciales= new int[nombresPartidos.length]; // O(P)
         this.votosDiputados= new int[nombresDistritos.length][nombresPartidos.length]; //O(DxP)
-        this.mesasRegistradas= new boolean[ultimasMesasDistritos[ultimasMesasDistritos.length-1]-1]; //Corregir
+        this.mesasRegistradas= new ListaEnlazada(); // O(1)
         this.totalVotos=0;// O(1)
         this.totalVotosDist= new int[nombresDistritos.length];//O(D)
-        //inicializar los heaps
         this.votosDiputadosXDistHeap = new maxHeap[nombresDistritos.length];//O(D)
         this.votosPresidencialesHeap = new maxHeap(votosPresidenciales.length-1);// O(P-1) --> O(P)
         this.calcDip = new boolean[nombresDistritos.length]; //O(D)
@@ -80,7 +99,7 @@ public class SistemaCNE {
     }
 
     //Dado un idMesa, busca a que distrito pertenece, y el lugar del mismo en nombresDistritos
-    // Complejidad: // Complejidad: O(log D)
+    // Complejidad: O(log D)
     private int indiceDeMesa(int idMesa) {
         int izquierda = 0; //O(1)
         int derecha = rangoMesasDistritosSup.length - 1;//O(1)
@@ -171,8 +190,7 @@ public class SistemaCNE {
         
         votosPresidencialesHeap = votosPrHeap;//O(1)
 
-
-        mesasRegistradas[idMesa]=true;//O(1)
+        mesasRegistradas.insertarAlInicio(idMesa);//O(1)
     }
     // Complejidad: O(1)
     public int votosPresidenciales(int idPartido) {
