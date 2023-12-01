@@ -18,7 +18,7 @@ public class ListaEnlazada {
         this.cabeza = null;
     }
 
-    public int longitud(){ // O(1)
+    public int longitud(){ // O(n)
         int cont = 0;
         Nodo temp = cabeza;
         while(temp.siguiente != null){
