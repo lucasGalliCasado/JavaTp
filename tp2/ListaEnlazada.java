@@ -63,4 +63,9 @@ public class ListaEnlazada {
         prev.siguiente = temp.siguiente;
         largo--;
     }
+
+    public boolean haySiguiente(){
+        return !(siguiente == null);
+    }
+
 }
