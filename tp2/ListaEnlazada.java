@@ -13,22 +13,25 @@ public class ListaEnlazada {
     }
 
     private Nodo cabeza;
-    private int largo;
 
     public ListaEnlazada() { // O(1)
         this.cabeza = null;
-        this.largo=0;
     }
 
     public int longitud(){ // O(1)
-        return largo;
+        int cont = 0;
+        Nodo temp = cabeza;
+        while(temp.siguiente != null){
+            cont++;
+            temp = temp.siguiente;
+        }
+        return cont;
     }
 
     public void insertarAlInicio(int valor) { // O(1)
         Nodo nuevoNodo = new Nodo(valor);
         nuevoNodo.siguiente = cabeza;
         cabeza = nuevoNodo;
-        largo++;
     }
 
     public boolean esta(int valor){ // O(n)
@@ -61,11 +64,10 @@ public class ListaEnlazada {
         }
 
         prev.siguiente = temp.siguiente;
-        largo--;
     }
 
     public boolean haySiguiente(){
-        return !(siguiente == null);
+        return !(cabeza.siguiente == null);
     }
 
 }
